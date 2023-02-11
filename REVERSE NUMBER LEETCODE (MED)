@@ -1,0 +1,17 @@
+int reverse(int x) {
+        bool flag=0;
+        if(x>0)flag=1;
+        int nm=x;
+        if(x<=INT_MIN)return 0;
+        int ans=0;
+        x=abs(x);
+        while((x)>0){
+            if(ans>INT_MAX/10)return 0;
+            ans=ans*10 +x%10;
+            x=x/10;
+        }
+        
+     if(flag)return ans;
+     return -ans;
+        
+    }
