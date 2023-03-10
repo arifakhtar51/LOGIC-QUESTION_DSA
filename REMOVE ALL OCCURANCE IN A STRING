@@ -1,0 +1,7 @@
+  string removeOccurrences(string s, string part) {
+        while(s.find(part)!=std::string::npos){
+            int a=s.find(part);
+            s.erase(a,part.size());
+        }
+        return s;
+    }
