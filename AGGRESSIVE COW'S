@@ -1,0 +1,32 @@
+bool isPossible( vector<int> arr,int n,int k,int mid){
+        int c=1;
+        int pos=arr[0];
+        for(int i=1;i<n;i++){
+            if(arr[i]-pos>=mid){
+                pos=arr[i];
+                c++;
+            }
+            if(c==k)return true;
+        }
+        return 0;
+        
+    }
+    int solve(int n, int k, vector<int> &st) {
+    
+        // Write your code here
+        sort(st.begin(),st.end());
+        
+        int s=0;
+        int e=st[n-1]-st[0];
+        int ans=-1;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(isPossible(st,n,k,mid)){
+                s=mid+1;
+                ans=mid;
+            }
+            else{
+                e=mid-1;
+            }
+        }
+        return ans;
