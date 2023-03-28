@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int ch[256]={0};
+        bool mapped[256]={0};
+        for(int i=0;i<s.size();i++){
+            if(ch[s[i]]==0 && mapped[t[i]]==0){
+                ch[s[i]]=t[i];
+                 mapped[t[i]]=1;
+            }
+        }
+        for(int i=0;i<s.size();i++){
+            if(char(ch[s[i]])!=t[i])return 0;
+        }return 1;
+    }
+};
