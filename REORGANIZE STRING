@@ -1,0 +1,47 @@
+class Solution {
+public:
+    string reorganizeString(string s) {
+        int hash[26]={0};
+        for(int i=0;i<s.size();i++){
+            hash[s[i]-'a']++;
+        }
+        int mx_cnt=INT_MIN;
+        char mx_freq_char;
+        for(int i=0;i<26;i++){
+            if(hash[i]>mx_cnt){
+                mx_cnt=hash[i];
+                mx_freq_char=i+'a';//type casting
+            }
+        }
+        //let's place mx_freq_character
+        int index=0;
+        while(mx_cnt>0 && index<s.size()){
+            s[index]=mx_freq_char;
+            index+=2;
+            mx_cnt--;
+        }
+    
+        if(mx_cnt!=0){
+            return "";
+        }
+        hash[mx_freq_char - 'a']=0;
+        //let's place others char
+        for(int i=0;i<26;i++){
+            while(hash[i]>0){
+                index=index>=s.size() ? 1:index;
+                s[index]=i+'a';
+                hash[i]--;
+                index+=2;
+            }
+        }
+        return s;
+    }
+
+
+
+
+
+
+
+
+};
