@@ -1,0 +1,32 @@
+class Solution {
+public:
+void solve(string& digit,int i,string op,vector<string> &ans,string *arr){
+    //base case
+    if(i>=digit.size()){
+        ans.push_back(op);
+        return ;
+    }
+    int d=digit[i]-'0';
+    string s=arr[d];
+   
+    for(int k=0;k<s.length();k++){
+           char c=s[k];
+   
+        op.push_back(c);
+
+        solve(digit,i+1,op,ans,arr);
+        op.pop_back();
+
+    }
+}
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        int i=0;
+        string arr[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        if(digits.size()<=0)
+        return ans;
+        string output;
+        solve(digits,i,output,ans,arr);
+        return ans;   
+    }
+};
