@@ -1,0 +1,52 @@
+
+
+
+//head = [1,2,3,4,5], k = 2
+//Output: [2,1,4,3,5]
+class Solution {
+public:
+int getLen(ListNode * head){
+    ListNode * temp=head;
+    int cnt=0;
+    while(temp!=NULL){
+        cnt++;
+        temp=temp->next;
+    }
+    return cnt;
+}
+    ListNode* solve(ListNode* &head, int k){
+        //
+        if(head==NULL){
+            return NULL;
+        }
+        if(head->next==NULL){
+            return head;
+        }
+        int n=getLen(head);
+        if(k>n){
+            return head;
+        }
+        //LL having grtr than 2 nodes
+        ListNode *prev=NULL;
+        ListNode* curr=head;
+        ListNode* forward=head->next;
+        int cnt=0;
+        while(cnt<k){
+            forward=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=forward;
+            
+            cnt++;
+        }
+        if(forward!=NULL){
+            head->next=solve(forward,k);
+        }
+        return prev;
+
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* a=solve(head,k);
+        return a;
+    }
+};
