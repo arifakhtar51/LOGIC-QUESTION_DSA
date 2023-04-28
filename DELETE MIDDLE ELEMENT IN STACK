@@ -1,0 +1,15 @@
+   void solve(stack<int>&s, int &sizeOfStack){
+        //base case
+        
+        if( ((sizeOfStack/2)+1)==s.size()){
+            s.pop();
+            return ;
+        }
+        int temp=s.top();
+        s.pop();
+        
+        //recursive call
+        solve(s,sizeOfStack);
+        //backtracking
+        s.push(temp);
+    }
