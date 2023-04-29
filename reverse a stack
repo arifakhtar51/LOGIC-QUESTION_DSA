@@ -14,3 +14,42 @@ public:
 
 
 
+
+
+
+class Solution{
+public:
+void isertAtBottom(stack<int> &st,int &data){
+    if(st.empty()){
+        st.push(data);
+        return ;
+    }
+    int temp=st.top();
+    st.pop();
+    
+    isertAtBottom(st,data);
+    
+    st.push(temp);
+}
+void solve(stack<int> &st){
+    if(st.empty()){
+        
+        return ;
+    }
+    int data=st.top();
+    st.pop();
+    
+    solve(st);
+    isertAtBottom(st,data);
+    
+    
+}
+
+    void Reverse(stack<int> &st){
+         solve(st);  
+    }
+};
+
+
+
+
