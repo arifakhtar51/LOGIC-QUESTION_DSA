@@ -1,0 +1,53 @@
+//wiwthout using map
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head)return 0;
+        Node *temp=head;
+        Node*temp2=NULL;
+        Node*temp3=head->next;
+        while(temp!=NULL ){
+            int val=temp->val;
+            Node * newNode=new Node(val);
+            newNode->random=0;
+            temp->next=newNode;
+            newNode->next=temp3;
+            temp=temp3;
+            if(temp)
+            temp3=temp->next;
+
+        }
+        
+        temp=head;
+        while(temp!=0){
+            if(!temp->random){
+                temp->next->random=NULL;
+            }
+            else
+            temp->next->random=temp->random->next;
+            temp=temp->next->next;
+        }
+        
+        temp=head;
+        temp3=head->next;
+        temp2=temp3;
+
+        while(temp && temp->next){
+            temp->next=temp->next->next;
+            if(temp3->next)
+            temp3->next=temp3->next->next;
+            temp=temp->next;
+            temp3=temp3->next;
+        }
+
+
+
+
+
+        return  temp2;
+
+    }
+};
+Console
+
+Copy List with Random Pointer - LeetCode
