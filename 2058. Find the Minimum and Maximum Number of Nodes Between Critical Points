@@ -1,0 +1,100 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+        vector<int> ans;
+        if(!head || head->next==0 || head->next->next==0||head->next->next->next==0) {
+            ans.push_back(-1);ans.push_back(-1);
+            return ans;
+        }
+        ListNode*prev=head;
+        ListNode*curr=head->next;
+        
+        ListNode* nxt=curr->next;
+        
+        int cnt=2;
+
+        int mnD=INT_MAX;
+        int mxD=INT_MIN;
+        int i=-1;
+        int count_karo=0;
+        int ab=0;
+        while(nxt!=NULL){
+            bool a=0;
+            if((curr->val>prev->val && curr->val>nxt->val) ||
+            (curr->val<prev->val && curr->val<nxt->val)){
+                a=1;
+            }
+            if(a==1 && i==-1){
+               count_karo++;
+               ab=cnt;
+               i=cnt;
+            }
+            else if(a==1){
+                
+                    mxD=cnt-ab;
+                
+                
+                mnD=min(mnD,cnt-i);
+                i=cnt;
+                count_karo++;
+            }
+                
+            
+            prev=curr;
+            curr=nxt;
+            nxt=nxt->next;
+
+            cnt++;
+
+        }
+        if(count_karo<2){
+            ans.push_back(-1);ans.push_back(-1);
+            return ans;
+        }
+        if(count_karo==2){
+            mxD=mnD;
+            ans.push_back(mnD);
+        ans.push_back(mxD);
+            return ans;
+        }
+        ans.push_back(mnD);
+        ans.push_back(mxD);
+ 
+        // int n=ans.size()-1;
+        // if(n+1==1){
+        //     ans.pop_back();
+        //     ans.push_back(-1);ans.push_back(-1);
+        //     return ans;
+        // }
+
+        //        if(n+1==0){
+        //      ans.push_back(-1);ans.push_back(-1);
+        //     return ans;
+        // }
+
+        // int mx=ans[n]-ans[0];
+        // int mn=ans[n]-ans[n-1];
+        // vector<int> arr;
+
+    
+
+        // for(int i=0;i<ans.size()-1;i++){
+        //     int a=ans[i+1]-ans[i];
+        //     mn=min(mn,a);
+        // }
+        // arr.push_back(mn);
+        // arr.push_back(mx);
+        return ans;
+        
+    }
+};
